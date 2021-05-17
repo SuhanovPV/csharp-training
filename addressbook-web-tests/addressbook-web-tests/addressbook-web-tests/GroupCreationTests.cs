@@ -43,7 +43,7 @@ namespace WebAddressbookTests
         public void GroupCreationTest()
         {
             OpenHomePage();
-            Login(new AccountData("admin","secret"));
+            Login(new AccountData("admin", "secret"));
             GoToGroupsPage();
             InitGroupCreation();
             GroupData group = new GroupData("NNN");
@@ -52,6 +52,12 @@ namespace WebAddressbookTests
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
+            LogOut();
+        }
+
+        private void LogOut()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
         }
 
         private void ReturnToGroupsPage()
