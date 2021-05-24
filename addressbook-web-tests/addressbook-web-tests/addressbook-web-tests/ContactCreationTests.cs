@@ -13,8 +13,8 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
+            navigator.GoToHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
             GoToAddContactPage();
             ContactData contact = new ContactData("testname");
             contact.LastName = "LName";
@@ -45,7 +45,7 @@ namespace WebAddressbookTests
             FillContactForm(contact);
             SubmitContactCreation();
             ReturnToHomePage();
-            LogOut();
+            loginHelper.LogOut();
         }
     }
 }
