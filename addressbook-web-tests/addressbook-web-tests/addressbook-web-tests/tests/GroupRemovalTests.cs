@@ -13,13 +13,13 @@ namespace WebAddressbookTests
         [Test]
         public void TheUntitledTestCaseTest()
         {
-            navigator.GoToHomePage();
-            loginHelper.Login(new AccountData("admin", "secret"));
-            navigator.GoToGroupsPage();
-            groupHelper.SelectGroup(2);
-            groupHelper.RemoveGroup();
-            groupHelper.ReturnToGroupsPage();
-            loginHelper.LogOut();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GoToGroupsPage();
+            app.Groups.SelectGroup(2);
+            app.Groups.RemoveGroup();
+            app.Groups.ReturnToGroupsPage();
+            app.Auth.LogOut();
         }
     }
 }
