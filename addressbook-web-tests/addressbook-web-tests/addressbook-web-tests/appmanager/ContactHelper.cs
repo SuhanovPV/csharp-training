@@ -11,8 +11,17 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver) : base(driver) 
+        public ContactHelper(ApplicationManager manager) : base(manager) 
         {
+        }
+
+        public ContactHelper Create(ContactData contact)
+        {
+            manager.Navigator.GoToAddContactPage();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToHomePage();
+            return this;
         }
 
         public void FillContactForm(ContactData contact)
@@ -25,8 +34,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
-            driver.FindElement(By.Name("photo")).Clear();
-            driver.FindElement(By.Name("photo")).SendKeys(contact.PhotoPath);
+            if (!String.IsNullOrEmpty(contact.PhotoPath)) 
+            {
+                driver.FindElement(By.Name("photo")).Clear();
+                driver.FindElement(By.Name("photo")).SendKeys(contact.PhotoPath);
+            }
             driver.FindElement(By.Name("title")).Clear();
             driver.FindElement(By.Name("title")).SendKeys(contact.Title);
             driver.FindElement(By.Name("company")).Clear();
@@ -56,10 +68,8 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(contact.Byear);
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
-            driver.FindElement(By.XPath("(//option[@value='16'])[2]")).Click();
             driver.FindElement(By.XPath("(//option[@value='" + contact.Aday + "'])[2]")).Click();
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
-            driver.FindElement(By.XPath("(//option[@value='December'])[2]")).Click();
             driver.FindElement(By.XPath("(//option[@value='" + contact.Amonth + "'])[2]")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);

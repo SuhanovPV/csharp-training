@@ -13,9 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToAddContactPage();
+            // Test data
             ContactData contact = new ContactData("testname1");
             contact.LastName = "LName";
             contact.MiddleName = "MName";
@@ -42,10 +40,53 @@ namespace WebAddressbookTests
             contact.Address2 = "KLG";
             contact.Phone2 = "8616615";
             contact.Notes = "Notes";
-            app.Contacts.FillContactForm(contact);
-            app.Contacts.SubmitContactCreation();
-            app.Contacts.ReturnToHomePage();
-            app.Auth.LogOut();
+
+            app.Contacts.Create(contact);
+        }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            // Test data
+            ContactData contact = new ContactData("");
+            contact.LastName = "";
+            contact.MiddleName = "";
+            contact.Nickname = "";
+            contact.PhotoPath = "";
+            contact.Title = "";
+            contact.Company = "";
+            contact.Address = "";
+            contact.HomePhone = "";
+            contact.MobilePhone = "";
+            contact.WorkPhone = "";
+            contact.Fax = "";
+            contact.Email = "";
+            contact.Email2 = "";
+            contact.Email3 = "";
+            contact.Homepage = "";
+            contact.Bday = "";
+            contact.Bmonth = "";
+            contact.Byear = "";
+            contact.Aday = "";
+            contact.Amonth = "";
+            contact.Ayear = "";
+            contact.Group = "";
+            contact.Address2 = "";
+            contact.Phone2 = "";
+            contact.Notes = "";
+
+            app.Contacts.Create(contact);
+        }
+
+        [Test]
+        public void PartialDataContactCreationTest()
+        {
+            // Test data
+            ContactData contact = new ContactData("name2");
+            contact.LastName = "lastname2";
+            contact.Fax = "fax";
+
+            app.Contacts.Create(contact);
         }
     }
 }

@@ -88,11 +88,18 @@ namespace WebAddressbookTests
         {
             get
             {
-                return photoPath;
+                if (String.IsNullOrEmpty(photoPath))
+                {
+                    return "";
+                }
+                else 
+                {
+                    return System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + photoPath;
+                }
             }
             set
             {
-                photoPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + value;
+                photoPath = value;
             }
         }
         public string Title
@@ -220,7 +227,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                return bday;
+                if (String.IsNullOrEmpty(bday))
+                {
+                    return "-";
+                }
+                else
+                {
+                    return bday;
+                }
             }
             set
             {
@@ -231,7 +245,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                return bmonth;
+                if(String.IsNullOrEmpty(bmonth))
+                {
+                    return "-";
+                }
+                else
+                {
+                    return bmonth;
+                }
             }
             set
             {
@@ -253,7 +274,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                return aday;
+                if (String.IsNullOrEmpty(aday))
+                {
+                    return "-";
+                }
+                else
+                {
+                    return aday;
+                }
             }
             set
             {
@@ -264,7 +292,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                return amonth;
+                if (String.IsNullOrEmpty(amonth))
+                {
+                    return "-";
+                }
+                else
+                {
+                    return amonth;
+                }
             }
             set
             {
@@ -286,7 +321,14 @@ namespace WebAddressbookTests
         {
             get
             {
-                return group;
+                if (String.IsNullOrEmpty(group))
+                {
+                    return "[none]";
+                }
+                else
+                {
+                    return group;
+                }
             }
             set
             {
