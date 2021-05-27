@@ -15,16 +15,34 @@ namespace WebAddressbookTests
         {
         }
 
+        public ContactHelper Remove(int index)
+        {
+            SelectContact(index);
+            InitContactRemoval();
+            ConfirmContactRemoval();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(int index, ContactData newContact)
+        {
+            InitContactModification(index);
+            FillContactForm(newContact, false);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
+        }
+
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.GoToAddContactPage();
-            FillContactForm(contact);
+            FillContactForm(contact, true);
             SubmitContactCreation();
             ReturnToHomePage();
             return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact, bool create)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
@@ -73,23 +91,59 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("(//option[@value='" + contact.Amonth + "'])[2]")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);
-            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.Group);
+            if (create)
+            {
+                new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.Group);
+            }
             driver.FindElement(By.Name("address2")).Clear();
             driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);
             driver.FindElement(By.Name("phone2")).Clear();
             driver.FindElement(By.Name("phone2")).SendKeys(contact.Phone2);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            return this;
         }
 
-        public void ReturnToHomePage()
+        public ContactHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
 
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            return this;
+        }
+
+        public ContactHelper ConfirmContactRemoval()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper InitContactRemoval()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(int index) 
+        {
+            driver.FindElement(By.XPath("(//img[@title='Edit'])[" + index + "]/..")).Click();
+            return this;
         }
     }
 }
