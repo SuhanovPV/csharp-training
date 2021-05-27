@@ -79,7 +79,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void PartialDataContactCreationTest()
+        public void PartialFieldsContactCreationTest()
         {
             // Test data
             ContactData contact = new ContactData("name2");
