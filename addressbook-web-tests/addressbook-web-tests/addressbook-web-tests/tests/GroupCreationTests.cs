@@ -14,7 +14,7 @@ namespace WebAddressbookTests
         public void GroupCreationTest()
         {
             // testing data
-            GroupData group = new GroupData("NNN");
+            GroupData group = new GroupData("ANN");
             group.Header = "HHH";
             group.Footer = "FFF";
 
