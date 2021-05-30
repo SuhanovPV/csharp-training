@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : TestBase
+    public class ContactModificationTests : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -17,6 +17,7 @@ namespace WebAddressbookTests
             ContactData newContact = new ContactData("NewName");
             newContact.LastName = "NewLastName";
             newContact.Nickname = "New NickName";
+            newContact.Group = "ZZZ";
 
             app.Contacts.Modify(2, newContact);
         }

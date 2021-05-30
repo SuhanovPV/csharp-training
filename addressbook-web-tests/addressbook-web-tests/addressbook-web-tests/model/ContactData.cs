@@ -9,31 +9,31 @@ namespace WebAddressbookTests
     public class ContactData
     {
         private string name;
-        private string middleName = "";
-        private string lastName = "";
-        private string nickname = "";
-        private string photoPath = "";
-        private string title = "";
-        private string company = "";
-        private string address = "";
-        private string homePhone = "";
-        private string mobilePhone = "";
-        private string workPhone = "";
-        private string fax = "";
-        private string email = "";
-        private string email2 = "";
-        private string email3 = "";
-        private string homepage = "";
-        private string bday = "";
-        private string bmonth = "";
-        private string byear = "";
-        private string aday = "";
-        private string amonth = "";
-        private string ayear = "";
-        private string group = "";
-        private string address2 = "";
-        private string phone2 = "";
-        private string notes = "";
+        private string middleName;
+        private string lastName;
+        private string nickname;
+        private string photoPath;
+        private string title;
+        private string company;
+        private string address;
+        private string homePhone;
+        private string mobilePhone;
+        private string workPhone;
+        private string fax;
+        private string email;
+        private string email2;
+        private string email3;
+        private string homepage;
+        private string bday;
+        private string bmonth;
+        private string byear;
+        private string aday;
+        private string amonth;
+        private string ayear;
+        private string group;
+        private string address2;
+        private string phone2;
+        private string notes;
 
         public ContactData(string name) 
         {
@@ -90,7 +90,7 @@ namespace WebAddressbookTests
             {
                 if (String.IsNullOrEmpty(photoPath))
                 {
-                    return "";
+                    return photoPath;
                 }
                 else 
                 {
@@ -227,14 +227,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (String.IsNullOrEmpty(bday))
-                {
-                    return "-";
-                }
-                else
-                {
-                    return bday;
-                }
+                return bday;
             }
             set
             {
@@ -245,14 +238,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if(String.IsNullOrEmpty(bmonth))
-                {
-                    return "-";
-                }
-                else
-                {
-                    return bmonth;
-                }
+                return bmonth;
             }
             set
             {
@@ -274,14 +260,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (String.IsNullOrEmpty(aday))
-                {
-                    return "-";
-                }
-                else
-                {
-                    return aday;
-                }
+                return aday;
             }
             set
             {
@@ -292,14 +271,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (String.IsNullOrEmpty(amonth))
-                {
-                    return "-";
-                }
-                else
-                {
-                    return amonth;
-                }
+                return amonth;
             }
             set
             {
@@ -321,14 +293,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (String.IsNullOrEmpty(group))
-                {
-                    return "[none]";
-                }
-                else
-                {
-                    return group;
-                }
+                return group;
             }
             set
             {
