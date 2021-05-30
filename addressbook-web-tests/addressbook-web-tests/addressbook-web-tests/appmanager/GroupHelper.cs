@@ -94,5 +94,17 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
+
+        public bool IsGroupListEmpty()
+        {
+            manager.Navigator.GoToGroupsPage();
+            return !IsElementPresent(By.XPath("//input[@name='selected[]']"));
+        }
+
+        public bool IsGroupPresent(string groupName)
+        {
+            manager.Navigator.GoToGroupsPage();
+            return !IsElementPresent(By.XPath("//input[@title='Select (" + groupName + ")']"));
+        }
     }
 }

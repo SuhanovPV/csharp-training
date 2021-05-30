@@ -117,5 +117,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("(//img[@title='Edit'])[" + index + "]/..")).Click();
             return this;
         }
+
+        public bool IsContactListEmpty() 
+        {
+            manager.Navigator.GoToHomePage();
+            return !IsElementPresent(By.XPath("//input[@name='selected[]']"));
+        }
     }
 }

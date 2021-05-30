@@ -17,6 +17,10 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
+            if (app.Groups.IsGroupListEmpty())
+            {
+                app.Groups.Create(new GroupData("RemoveGroup"));
+            }
             app.Groups.Modify(1, newData);
         }
     }

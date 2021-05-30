@@ -19,7 +19,11 @@ namespace WebAddressbookTests
             newContact.Nickname = "New NickName";
             newContact.Group = "ZZZ";
 
-            app.Contacts.Modify(2, newContact);
+            if (app.Contacts.IsContactListEmpty())
+            {
+                app.Contacts.Create(new ContactData("remove"));
+            }
+            app.Contacts.Modify(1, newContact);
         }
     }
 }

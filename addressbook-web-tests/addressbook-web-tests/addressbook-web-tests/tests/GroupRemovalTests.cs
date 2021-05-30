@@ -11,9 +11,13 @@ namespace WebAddressbookTests
     {
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void GroupRemovalTest()
         {
-            app.Groups.Remove(2);
+            if (app.Groups.IsGroupListEmpty()) 
+            {
+                app.Groups.Create(new GroupData("RemoveGroup"));
+            }
+            app.Groups.Remove(1);
         }
     }
 }

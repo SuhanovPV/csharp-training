@@ -41,6 +41,10 @@ namespace WebAddressbookTests
             contact.Phone2 = "8616615";
             contact.Notes = "Notes";
 
+            if (app.Groups.IsGroupPresent(contact.Group)) 
+            {
+                app.Groups.Create(new GroupData(contact.Group));
+            }
             app.Contacts.Create(contact);
         }
 
