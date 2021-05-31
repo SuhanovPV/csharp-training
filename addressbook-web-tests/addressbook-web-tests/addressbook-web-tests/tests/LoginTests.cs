@@ -23,7 +23,7 @@ namespace WebAddressbookTests
         public void LoginWithInvalidCredentials()
         {
             app.Auth.LogOut();
-            AccountData account = new AccountData("adminsdf", "secret");
+            AccountData account = new AccountData("admin", "sАeсsdret");
             app.Auth.Login(account);
             Assert.IsFalse(app.Auth.IsLoggedIn(account));
         }

@@ -14,15 +14,20 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
+            //===========================
+            System.Console.WriteLine("ContactModificationTest: Contact modification test started");
+
             ContactData newContact = new ContactData("NewName");
             newContact.LastName = "NewLastName";
             newContact.Nickname = "New NickName";
             newContact.Group = "ZZZ";
-
+            System.Console.WriteLine("ContactModificationTest: Checking IsContactListEmpty");
             if (app.Contacts.IsContactListEmpty())
+
             {
                 app.Contacts.Create(new ContactData("remove"));
             }
+            System.Console.WriteLine("ContactModificationTest: start contact modifying");
             app.Contacts.Modify(1, newContact);
         }
     }

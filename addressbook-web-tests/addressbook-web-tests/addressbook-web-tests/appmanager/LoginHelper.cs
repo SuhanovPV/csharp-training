@@ -33,8 +33,9 @@ namespace WebAddressbookTests
         public void LogOut()
         {
             if (IsLoggedIn()) 
-            { 
-                driver.FindElement(By.LinkText("Logout")).Click(); 
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+                //System.Threading.Thread.Sleep(100);
             }
         }
 
