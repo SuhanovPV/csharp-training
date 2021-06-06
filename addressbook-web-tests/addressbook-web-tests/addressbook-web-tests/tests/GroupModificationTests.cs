@@ -17,11 +17,21 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
+            int index = 0;
+
             if (app.Groups.IsGroupListEmpty())
             {
                 app.Groups.Create(new GroupData("RemoveGroup"));
             }
-            app.Groups.Modify(1, newData);
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Modify(index, newData);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[index].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
         }
     }
 }
