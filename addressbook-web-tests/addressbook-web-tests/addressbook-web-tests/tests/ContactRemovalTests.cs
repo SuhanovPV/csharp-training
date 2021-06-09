@@ -17,7 +17,7 @@ namespace WebAddressbookTests
             int index = 0;
             if (app.Contacts.IsContactListEmpty()) 
             {
-                app.Contacts.Create(new ContactData("remove"));
+                app.Contacts.Create(new ContactData("", ""));
             }
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Remove(index);

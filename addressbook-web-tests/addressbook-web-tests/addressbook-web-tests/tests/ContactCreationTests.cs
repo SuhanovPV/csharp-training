@@ -15,8 +15,7 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
             // Test data
-            ContactData contact = new ContactData("testname1");
-            contact.LastName = "LName";
+            ContactData contact = new ContactData("testname1", "LName");
             contact.MiddleName = "MName";
             contact.Nickname = "NName";
             contact.PhotoPath = "\\pict\\pic.png";
@@ -60,7 +59,7 @@ namespace WebAddressbookTests
         public void EmptyContactCreationTest()
         {
             // Test data
-            ContactData contact = new ContactData("");
+            ContactData contact = new ContactData("", "");
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
             List<ContactData> newContacts = app.Contacts.GetContactList();
@@ -75,8 +74,7 @@ namespace WebAddressbookTests
         public void PartialFieldsContactCreationTest()
         {
             // Test data
-            ContactData contact = new ContactData("name2");
-            contact.LastName = "lastname2";
+            ContactData contact = new ContactData("name2", "lastname2");
             contact.Fax = "fax";
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);

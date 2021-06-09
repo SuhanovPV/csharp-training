@@ -15,6 +15,8 @@ namespace WebAddressbookTests
         {
         }
 
+        private List<ContactData> contactCache = null;
+
         public ContactHelper Remove(int index)
         {
             SelectContact(index);
@@ -78,16 +80,20 @@ namespace WebAddressbookTests
 
         public List<ContactData> GetContactList()
         {
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            List<ContactData> contacts = new List<ContactData>() { };
-            foreach (IWebElement element in elements) 
+            if (contactCache == null) 
             {
-                String firsName = element.FindElement(By.XPath(".//td[3]")).Text;
-                String lastName = element.FindElement(By.XPath(".//td[2]")).Text;
-                contacts.Add(new ContactData(firsName, lastName));
+                manager.Navigator.GoToHomePage();
+                contactCache = new List<ContactData>() { };
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    String firsName = element.FindElement(By.XPath(".//td[3]")).Text;
+                    String lastName = element.FindElement(By.XPath(".//td[2]")).Text;
+                    contactCache.Add(new ContactData(firsName, lastName));
+                }
+
             }
-            return contacts;
+            return new List<ContactData>(contactCache);
         }
 
         public ContactHelper ReturnToHomePage()
@@ -99,18 +105,21 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper ConfirmContactRemoval()
         {
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;
             return this;
         }
 

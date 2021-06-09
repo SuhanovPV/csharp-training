@@ -17,13 +17,13 @@ namespace WebAddressbookTests
             //===========================
             System.Console.WriteLine("ContactModificationTest: Contact modification test started");
             int index = 0;
-            ContactData newContact = new ContactData("NewName");
+            ContactData newContact = new ContactData("NewName", "NewLastName");
             newContact.LastName = "NewLastName";
             newContact.Nickname = "New NickName";
             newContact.Group = "ZZZ";
             if (app.Contacts.IsContactListEmpty())
             {
-                app.Contacts.Create(new ContactData("remove"));
+                app.Contacts.Create(new ContactData("", ""));
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
