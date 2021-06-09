@@ -89,7 +89,10 @@ namespace WebAddressbookTests
                 {
                     String firsName = element.FindElement(By.XPath(".//td[3]")).Text;
                     String lastName = element.FindElement(By.XPath(".//td[2]")).Text;
-                    contactCache.Add(new ContactData(firsName, lastName));
+                    contactCache.Add(new ContactData(firsName, lastName)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("id")
+                    }) ;
                 }
 
             }

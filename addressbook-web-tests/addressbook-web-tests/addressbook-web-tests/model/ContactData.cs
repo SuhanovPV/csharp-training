@@ -36,7 +36,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "Contat -> first name: " + Name + ", last name " + LastName;
+            return "Contat (" + Id + ") first name: " + Name + ", last name " + LastName;
         }
 
         public bool Equals(ContactData other) 
@@ -62,6 +62,8 @@ namespace WebAddressbookTests
         }
 
         public string Name { get; set; }
+        
+        public string Id { get; set; }
 
         public string MiddleName { get; set; }
         
