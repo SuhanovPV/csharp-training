@@ -16,19 +16,25 @@ namespace WebAddressbookTests
         {
             //===========================
             System.Console.WriteLine("ContactModificationTest: Contact modification test started");
-
+            int index = 0;
             ContactData newContact = new ContactData("NewName");
             newContact.LastName = "NewLastName";
             newContact.Nickname = "New NickName";
             newContact.Group = "ZZZ";
-            System.Console.WriteLine("ContactModificationTest: Checking IsContactListEmpty");
             if (app.Contacts.IsContactListEmpty())
-
             {
                 app.Contacts.Create(new ContactData("remove"));
             }
-            System.Console.WriteLine("ContactModificationTest: start contact modifying");
-            app.Contacts.Modify(1, newContact);
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Modify(index, newContact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[index].Name = newContact.Name;
+            oldContacts[index].LastName = newContact.LastName;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
         }
     }
 }

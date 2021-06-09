@@ -21,7 +21,7 @@ namespace WebAddressbookTests
 
         public void Type(By locator, string text)
         {
-            if (text != null)
+            if (!String.IsNullOrEmpty(text))
             {
                 driver.FindElement(locator).Clear();
                 driver.FindElement(locator).SendKeys(text);

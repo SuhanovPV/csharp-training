@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string name;
         private string middleName;
-        private string lastName;
+        private string lastName = "";
         private string nickname;
         private string photoPath;
         private string title;
@@ -38,6 +38,51 @@ namespace WebAddressbookTests
         public ContactData(string name) 
         {
             this.name = name;
+        }
+
+        public ContactData(string name, string lastName) : this(name)
+        {
+            this.lastName = lastName;
+        }
+
+        public int CompareTo(ContactData other) 
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            if (Name.CompareTo(other.Name) == 0) 
+            {
+                return LastName.CompareTo(other.LastName);
+            }
+            return Name.CompareTo(other.Name);
+        }
+
+        public override string ToString()
+        {
+            return "Contat -> first name: " + Name + ", last name " + LastName;
+        }
+
+        public bool Equals(ContactData other) 
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (Name == other.Name) 
+            {
+                if (LastName == other.LastName) 
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public string Name

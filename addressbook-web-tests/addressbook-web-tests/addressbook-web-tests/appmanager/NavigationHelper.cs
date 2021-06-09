@@ -27,6 +27,11 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
 
+        public void HomePage() 
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
         public void GoToGroupsPage()
         {
             if (driver.Url == baseURL + "/addressbook/group.php"
