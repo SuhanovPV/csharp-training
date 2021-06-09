@@ -58,6 +58,11 @@ namespace WebAddressbookTests
             return Name.CompareTo(other.Name);
         }
 
+        public override int GetHashCode()
+        {
+            return (Name+LastName).GetHashCode();
+        }
+
         public override string ToString()
         {
             return "Contat -> first name: " + Name + ", last name " + LastName;
