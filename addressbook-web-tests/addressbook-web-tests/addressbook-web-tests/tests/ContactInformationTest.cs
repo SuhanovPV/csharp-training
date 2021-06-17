@@ -30,12 +30,6 @@ namespace WebAddressbookTests
             int index = 1;
             String textFromCard = app.Contacts.GetContactInformationFromCard(index).Trim();
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(index);
-            
-            //System.Console.WriteLine("==== TEXT FROM CARD ====");
-            //System.Console.WriteLine(textFromCard.Length);
-            //System.Console.WriteLine("==== TEXT TO CARD FORMAT ====");
-            //System.Console.WriteLine(fromForm.CardFormat.Length);
-
             Assert.AreEqual(textFromCard, fromForm.CardFormat);            
 
         }
