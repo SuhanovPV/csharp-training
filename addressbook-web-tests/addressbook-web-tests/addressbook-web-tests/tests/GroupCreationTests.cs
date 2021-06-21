@@ -47,7 +47,6 @@ namespace WebAddressbookTests
 
         public static IEnumerable<GroupData> GroupDataFromXMLFile()
         {
-            List<GroupData> groups = new List<GroupData>();
             return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"groups.xml"));
         }
