@@ -65,6 +65,17 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper Modify(string id, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(id);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGropModification();
+            ReturnToGroupsPage();
+            return this;
+        }
+
         public int GetGroupCount()
         {
             return driver.FindElements(By.CssSelector("span.group")).Count;
