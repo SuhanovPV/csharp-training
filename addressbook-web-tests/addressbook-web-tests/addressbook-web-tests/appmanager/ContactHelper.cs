@@ -120,9 +120,29 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper Remove(string id)
+        {
+            SelectContact(id);
+            InitContactRemoval();
+            ConfirmContactRemoval();
+            manager.Navigator.HomePage();
+            return this;
+        }
+
         public ContactHelper Modify(int index, ContactData newContact)
         {
+            manager.Navigator.HomePage();
             InitContactModification(index);
+            FillContactForm(newContact);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(string id, ContactData newContact)
+        {
+            manager.Navigator.HomePage();
+            InitContactModification(id);
             FillContactForm(newContact);
             SubmitContactModification();
             ReturnToHomePage();
@@ -232,9 +252,21 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value=" + id + "]")).Click();
+            return this;
+        }
+
         public ContactHelper InitContactModification(int index)
         {
             driver.FindElement(By.XPath("(//img[@title='Edit'])[" + (index  + 1) + "]/..")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value=" + id + "]/../..//img[@title='Edit']")).Click();
             return this;
         }
 

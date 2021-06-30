@@ -9,13 +9,11 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
-        {
-            //===========================
-            System.Console.WriteLine("ContactModificationTest: Contact modification test started");
+        { 
             int index = 0;
             ContactData newContact = new ContactData("NewName", "NewLastName");
             newContact.Nickname = "NewNickName";
@@ -26,12 +24,12 @@ namespace WebAddressbookTests
                 app.Contacts.Create(new ContactData("", ""));
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldDate = oldContacts[index];
 
-            app.Contacts.Modify(index, newContact);
+            app.Contacts.Modify(oldDate.Id, newContact);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts[index].Name = newContact.Name;
             oldContacts[index].LastName = newContact.LastName;

@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDateProvider()
         {
@@ -63,15 +63,13 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromJSONFile")]
         public void ContactCreationTest(ContactData contact)
         {
-            
-
             if (app.Groups.IsGroupPresent(contact.Group)) 
             {
                 app.Groups.Create(new GroupData(contact.Group));
             }
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contacts.Create(contact);
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();
