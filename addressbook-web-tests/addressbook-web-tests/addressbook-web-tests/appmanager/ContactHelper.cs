@@ -158,6 +158,57 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.HomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Id);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+            return this;
+        }
+
+        public ContactHelper RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.HomePage();
+            FilterByGroup(group.Id);
+            SelectContact(contact.Id);
+            CommitRemovingFromGroup();
+            return this;
+        }
+
+        public ContactHelper CommitRemovingFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+            return this;
+        }
+
+        public ContactHelper CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectGroupToAdd(string id)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByValue(id);
+            return this;
+        }
+
+        public ContactHelper ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+            return this;
+        }
+
+        public ContactHelper FilterByGroup(string id)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByValue(id);
+            return this;
+        }
+
         public ContactHelper FillContactForm(ContactData contact)
         {
             Type(By.Name("firstname"), contact.Name);

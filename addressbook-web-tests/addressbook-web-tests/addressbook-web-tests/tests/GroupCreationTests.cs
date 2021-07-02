@@ -97,14 +97,9 @@ namespace WebAddressbookTests
         [Test]
         public void TestDBConnectivity()
         {
-
-
-
-            List<ContactData> fromDB = ContactData.GetAll();
-
-            foreach (ContactData contact in fromDB) 
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts()) 
             {
-                System.Console.WriteLine(contact);
+                System.Console.Out.WriteLine(contact.Deprecated);
             }
         }
     }
