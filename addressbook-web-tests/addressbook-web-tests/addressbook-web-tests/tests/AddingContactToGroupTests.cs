@@ -28,6 +28,7 @@ namespace WebAddressbookTests
             {
                 app.Contacts.Create(new ContactData("name", "lastname"));
             }
+
             if (allGroups.Count > 0 && allContacts.Count > 0)
             {
                 foreach (GroupData group in allGroups)
