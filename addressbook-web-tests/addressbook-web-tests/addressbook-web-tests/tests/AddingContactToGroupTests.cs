@@ -13,20 +13,51 @@ namespace WebAddressbookTests
         [Test]
         public void TestAddingContactToGroup()
         {
-            GroupData group = GroupData.GetAll()[0];
-            List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAll().Except(oldList).First();
+            List<GroupData> allGroups = GroupData.GetAll();
+            List<ContactData> allContacts = ContactData.GetAll();
 
-            app.Contacts.AddContactToGroup(contact, group);
+            
+            GroupData testGroup = null;
 
-            List<ContactData> newList = group.GetContacts();
-            oldList.Add(contact);
+            if (allGroups.Count == 0)
+            {
+                app.Groups.Create(new GroupData("test_group"));
+            }
+
+            if (allContacts.Count == 0)
+            {
+                app.Contacts.Create(new ContactData("name", "lastname"));
+            }
+            if (allGroups.Count > 0 && allContacts.Count > 0)
+            {
+                foreach (GroupData group in allGroups)
+                {
+                    if (group.GetContacts().Count < allContacts.Count)
+                    {
+                        testGroup = group;
+                        break;
+                    }
+                }
+            }
+
+
+            if (testGroup == null) 
+            {
+                testGroup = GroupData.GetAll()[0];
+                app.Contacts.Create(new ContactData("name1", "lastname1"));
+            }
+                        
+            List<ContactData> oldList = testGroup.GetContacts();
+            ContactData testContact = ContactData.GetAll().Except(oldList).First();
+
+            app.Contacts.AddContactToGroup(testContact, testGroup);
+
+            List<ContactData> newList = testGroup.GetContacts();
+            oldList.Add(testContact);
             oldList.Sort();
             newList.Sort();
 
             Assert.AreEqual(oldList, newList);
-
-
         }
     }
 }
