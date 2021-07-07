@@ -17,6 +17,39 @@ namespace addressbook_tests_white
 
         public GroupHelper(ApplicationManager manager) : base(manager) { }
 
+        public void Add(GroupData newGroup)
+        {
+            Window dialogue = OpenGroupsDialog();
+            dialogue.Get<Button>("uxNewAddressButton").Click();
+            TextBox textBox = (TextBox)dialogue.Get(SearchCriteria.ByControlType(ControlType.Edit));
+            textBox.Enter(newGroup.Name);
+            Keyboard.Instance.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
+            CloseGroupsDialog(dialogue);
+        }
+
+        internal void ModifyGropAtIndex(int index, GroupData group)
+        {
+            Window dialogue = OpenGroupsDialog();
+            Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+            tree.Nodes[0].Nodes[index].Click();
+            dialogue.Get<Button>("uxEditAddressButton").Click();
+            TextBox textBox = (TextBox)dialogue.Get(SearchCriteria.ByControlType(ControlType.Edit));
+            textBox.Enter(group.Name);
+            Keyboard.Instance.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
+            CloseGroupsDialog(dialogue);
+        }
+
+        public void RemoveGroupAtIndex(int index)
+        {
+            Window dialogue = OpenGroupsDialog();
+            Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+            tree.Nodes[0].Nodes[index].Click();
+            dialogue.Get<Button>("uxDeleteAddressButton").Click();
+            Window deleteDialogue = dialogue.ModalWindow("Delete group");
+            deleteDialogue.Get<Button>("uxOKAddressButton").Click();
+            CloseGroupsDialog(dialogue);
+        }
+
         public List<GroupData> GetGroupList()
         {
             List<GroupData> list = new List<GroupData>();
@@ -27,6 +60,7 @@ namespace addressbook_tests_white
             foreach (TreeNode item in root.Nodes) 
             {
                 list.Add(new GroupData()
+
                 {
                     Name = item.Text
                 }); ;
@@ -34,17 +68,6 @@ namespace addressbook_tests_white
 
             CloseGroupsDialog(dialogue);
             return list;
-        }
-
-        public void Add(GroupData newGroup)
-        {
-            Window dialogue = OpenGroupsDialog();
-            dialogue.Get<Button>("uxNewAddressButton").Click();
-            TextBox textBox = (TextBox) dialogue.Get(SearchCriteria.ByControlType(ControlType.Edit));
-            textBox.Enter(newGroup.Name);
-            Keyboard.Instance.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
-            CloseGroupsDialog(dialogue);
-
         }
 
         private void CloseGroupsDialog(Window dialogue)
