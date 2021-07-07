@@ -22,6 +22,7 @@ namespace addressbook_tests_white
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
             oldGroups.Add(newGroup);
+
             oldGroups.Sort();
             newGroups.Sort();
 
