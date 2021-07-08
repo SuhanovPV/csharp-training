@@ -10,7 +10,13 @@ namespace addressbook_tests_white
         [Test]
         public void TestContactCreation()
         {
-            ContactData contact = new ContactData() { FirstName = "fname", LastName = "lname" , TaxNumber = "465135"};
+            ContactData contact = new ContactData() 
+            { 
+                FirstName = "fname", 
+                LastName = "lname" , 
+                TaxNumber = "465135", 
+                Bday = new DateTime(2015, 2, 10)
+            };
 
             //List<ContactData> oldContacts = app.Contacts.GetContactList();
 

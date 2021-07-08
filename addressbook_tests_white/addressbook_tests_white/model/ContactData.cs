@@ -13,7 +13,7 @@ namespace addressbook_tests_white
         public string MiddleName { get; set; }
         public string PersonalTitle { get; set; }
         public string Identifier { get; set; }
-        public string Bday { get; set; }
+        public DateTime Bday { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Fax { get; set; }
