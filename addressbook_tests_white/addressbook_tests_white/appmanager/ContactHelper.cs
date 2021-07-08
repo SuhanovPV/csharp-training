@@ -4,6 +4,7 @@ using TestStack.White;
 using TestStack.White.InputDevices;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TableItems;
 using TestStack.White.UIItems.TreeItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White.WindowsAPI;
@@ -23,6 +24,47 @@ namespace addressbook_tests_white
             FillContactForm(contact, form);
 
             form.Get<Button>("uxSaveAddressButton").Click();
+        }
+
+        public void RemoveContactAtIndex(int index)
+        {
+            TableRows rows = manager.MainWindow.Get<Table>("uxAddressGrid").Rows;
+            rows[index].Click();
+            manager.MainWindow.Get<Button>("uxDeleteAddressButton").Click();
+            Window dialogue = manager.MainWindow.ModalWindow("Question");
+            //dialogue.Get<Button>("265298").Click();
+            Button btn = (Button) dialogue.Get(SearchCriteria.ByText("Yes"));
+            btn.Click();
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            TableRows rows = manager.MainWindow.Get<Table>("uxAddressGrid").Rows;
+
+            foreach (TableRow row in rows)
+            {
+                contacts.Add(new ContactData()
+                {
+                    FirstName = GetCellValue(row.Cells[0]),
+                    LastName = GetCellValue(row.Cells[1]),
+                    CompanyName = GetCellValue(row.Cells[2]),
+                    City = GetCellValue(row.Cells[3]),
+                    Address = GetCellValue(row.Cells[4]),
+                });
+            }
+
+            return contacts;
+        }
+
+        public string GetCellValue(TableCell cell) 
+        {
+            string text = cell.Value.ToString();
+            if (text == "(не определено)") 
+            {
+                return "";
+            }
+            return text;
         }
 
         public void FillContactForm(ContactData contact, Window form)

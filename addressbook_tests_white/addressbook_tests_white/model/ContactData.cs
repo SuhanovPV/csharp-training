@@ -28,14 +28,15 @@ namespace addressbook_tests_white
         public string RegisterNumber { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
-        public string Citi { get; set; }
+        public string City { get; set; }
         public string Zip { get; set; }
         public string Address { get; set; }
         public string Note { get; set; }
 
         public override string ToString()
         {
-            return "Contact <" + FirstName + "; " + LastName + " > ";
+            //return "Contact <" + FirstName + "; " + LastName + " > ";
+            return "Contact: <FirstName: " + FirstName + "; LastName: " + LastName + "; CompanyName: " + CompanyName + "; City: " + City + "; Address: " + Address + ">";
         }
 
         public int CompareTo(ContactData other)

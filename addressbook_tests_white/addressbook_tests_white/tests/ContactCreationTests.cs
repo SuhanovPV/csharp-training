@@ -18,18 +18,18 @@ namespace addressbook_tests_white
                 Bday = new DateTime(2015, 2, 10)
             };
 
-            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Add(contact);
 
-            //List<GroupData> newContacts = app.Contacts.GetGroupList();
+            List<ContactData> newContacts = app.Contacts.GetContactList();
 
-            //oldContacts.Add(contact);
+            oldContacts.Add(contact);
 
-            //oldContacts.Sort();
-            //newContacts.Sort();
+            oldContacts.Sort();
+            newContacts.Sort();
 
-            //Assert.AreEqual(oldContacts, newContacts);
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
