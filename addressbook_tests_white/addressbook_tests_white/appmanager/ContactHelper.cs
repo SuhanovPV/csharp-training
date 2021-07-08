@@ -27,14 +27,13 @@ namespace addressbook_tests_white
 
         public void FillContactForm(ContactData contact, Window form)
         {
-            DateTime date = new DateTime(2015,4,5);
             TypeTextBox(form, "ueIdentifierAddressTextBox", contact.Identifier);
             TypeTextBox(form, "ueTitleAddressTextBox", contact.PersonalTitle);
             TypeTextBox(form, "ueFirstNameAddressTextBox", contact.FirstName);
             TypeTextBox(form, "ueMiddleNameAddressTextBox", contact.MiddleName);
-            TypeTextBox(form, "uelastnameaddresstextbox", contact.LastName);
+            TypeTextBox(form, "ueLastNameAddressTextBox", contact.LastName);
 
-            form.Get<DateTimePicker>("ueBirthDayDateTimePicker").SetDate(date, DateFormat.DayMonthYear);
+            form.Get<DateTimePicker>("ueBirthDayDateTimePicker").SetDate(contact.Bday, DateFormat.DayMonthYear);
 
             TypeTextBox(form, "uePhone1AddressTextBox", contact.Phone1);
             TypeTextBox(form, "uePhone2AddressTextBox", contact.Phone2);
