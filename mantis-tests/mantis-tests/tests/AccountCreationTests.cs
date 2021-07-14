@@ -17,8 +17,7 @@ namespace mantis_tests
             {
                 app.Ftp.Upload("/config_inc.php", localFile); 
             }
-             
-           
+
         }
         
         [Test]
@@ -28,10 +27,15 @@ namespace mantis_tests
             { 
                 Name = "testuser",
                 Password = "password",
-                Email = "testuser1@loacalhost.localdomain" 
+                Email = "testuser@localhost.localdomain"
             };
 
+            app.James.Delete(account);
+            app.James.Add(account);
+
             app.Registration.Register(account);
+
+
         }
 
         [TestFixtureTearDown]
