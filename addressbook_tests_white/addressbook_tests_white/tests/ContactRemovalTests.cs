@@ -15,13 +15,13 @@ namespace addressbook_tests_white
 
             if (oldContacts.Count == 0) 
             {
-                ContactData contact = new ContactData()
+                app.Contacts.Add(new ContactData()
                 {
                     FirstName = "fname",
                     LastName = "lname",
-                };
-                app.Contacts.Add(contact);
-                oldContacts.Add(contact);
+                });
+
+                oldContacts = app.Contacts.GetContactList();
             }
 
             app.Contacts.RemoveContactAtIndex(index);

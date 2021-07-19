@@ -32,7 +32,6 @@ namespace addressbook_tests_white
             rows[index].Click();
             manager.MainWindow.Get<Button>("uxDeleteAddressButton").Click();
             Window dialogue = manager.MainWindow.ModalWindow("Question");
-            //dialogue.Get<Button>("265298").Click();
             Button btn = (Button) dialogue.Get(SearchCriteria.ByText("Yes"));
             btn.Click();
         }

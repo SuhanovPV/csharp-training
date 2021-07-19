@@ -15,9 +15,9 @@ namespace addressbook_tests_white
 
             if (oldGroupList.Count == 1)
             {
-                GroupData group = new GroupData() { Name = "1" };
-                app.Groups.Add(group);
-                oldGroupList.Add(group);
+                app.Groups.Add(new GroupData() { Name = "1" });
+
+                oldGroupList = app.Groups.GetGroupList();
                 oldGroupList.Sort();
             }
 
