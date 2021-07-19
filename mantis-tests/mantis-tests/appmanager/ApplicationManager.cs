@@ -13,12 +13,14 @@ namespace mantis_tests
     public class ApplicationManager
     {
         protected IWebDriver driver;
-        protected string baseURL;
+        protected string baseUrlL;
 
         public RegistrationHelper Registration { get; private set; }
         public FtpHelper Ftp { get; private set; }
         public JamesHelper James { get; private set; }
         public MailHelper Mail { get; private set; }
+        public AdminHelper Admin { get; private set; }
+        public APIHelper API { get; private set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -26,11 +28,13 @@ namespace mantis_tests
         {
             driver = new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
-            baseURL = "http://localhost";
+            baseUrlL = "http://localhost/mantisbt-2.25.2/";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            Admin = new AdminHelper(this, baseUrlL);
+            API = new APIHelper(this);
         }
 
         ~ApplicationManager() 
