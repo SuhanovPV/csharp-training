@@ -13,26 +13,31 @@ namespace mantis_project_tests
         [Test]
         public void RemoveRojectTest() 
         {
+
             ProjectData project = new ProjectData()
             {
-                Name = "new Project1",
-                State = "выпущен",
-                Inheritance = true,
-                Visibility = "публичный",
+                Name = "new Project99",
                 Description = "Testing Project"
             };
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "123"
+            };
 
-            List <ProjectData> oldProjects = app.Projects.GetProjectsList();
+            List <ProjectData> oldProjects = app.API.GetProjectList(account);
+
+            
 
             if (!oldProjects.Contains(project)) 
             {
-                app.Projects.CreateProject(project);
-                oldProjects = app.Projects.GetProjectsList();
+                app.API.CreateProject(account, project);
+                oldProjects = app.API.GetProjectList(account);
             }
 
             app.Projects.RemoveProject(project);
 
-            List<ProjectData> newProjects = app.Projects.GetProjectsList();
+            List<ProjectData> newProjects = app.API.GetProjectList(account);
 
             oldProjects.RemoveAt(oldProjects.IndexOf(project));
             oldProjects.Sort();

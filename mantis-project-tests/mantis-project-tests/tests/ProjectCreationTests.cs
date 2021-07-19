@@ -21,18 +21,24 @@ namespace mantis_project_tests
                 Visibility = "публичный",
                 Description = "Testing Project"
             };
-
-            List<ProjectData> oldProjects = app.Projects.GetProjectsList();
-
-            if (oldProjects.Contains(project))
+            AccountData account = new AccountData()
             {
-                app.Projects.RemoveProject(project);
-                oldProjects = app.Projects.GetProjectsList();
+                Name = "administrator",
+                Password = "123"
+            };
+
+            List<ProjectData> oldProjects = app.API.GetProjectList(account);
+            ProjectData existingProject = oldProjects.Find(x => x.Name == project.Name);
+
+            if (existingProject != null)
+            {
+                app.API.DeleteProject(account, existingProject);
+                oldProjects = app.API.GetProjectList(account);
             }
 
             app.Projects.CreateProject(project);
             
-            List<ProjectData> newProjects = app.Projects.GetProjectsList();
+            List<ProjectData> newProjects = app.API.GetProjectList(account);
 
             oldProjects.Add(project);
             oldProjects.Sort();

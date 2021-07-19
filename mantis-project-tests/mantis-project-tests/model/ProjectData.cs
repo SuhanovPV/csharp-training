@@ -13,6 +13,8 @@ namespace mantis_project_tests
 
         public ProjectData() { }
 
+        public String Id { set; get; }
+
         public string Name { set; get; }
 
         public string State {
